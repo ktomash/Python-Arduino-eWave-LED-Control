@@ -1,0 +1,5 @@
+{
+    "board": "arduino:avr:megaADK",
+    "sketch": "working\\working.ino",
+    "port": "COM3"
+}
