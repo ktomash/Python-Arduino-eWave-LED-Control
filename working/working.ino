@@ -8,6 +8,8 @@
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(60, PIN, NEO_GRB + NEO_KHZ800);
 
+int l_IBI = 0;
+
 
 void setup() {
   Serial.begin(115200);
@@ -23,7 +25,7 @@ void loop() {
   serial_working = 0;
   // put your main code here, to run repeatedly:
   //colorSet(strip.Color(255,0,0));
-  int l_IBI = 0;
+ // int l_IBI = 0;
  
  if (Serial.available() > 0) {
     serial_working = 1;
@@ -31,7 +33,7 @@ void loop() {
 
     if (l_IBI > IBI) {
       for (int i = l_IBI; i > IBI; i--) {
-        strip.setPixelColor(i, strip.Color(0, 0, 0));  
+        strip.setPixelColor(i, 0);  
         strip.show();
       }
     } else {
@@ -40,6 +42,7 @@ void loop() {
         strip.show();
       }
     }
+    l_IBI = IBI; 
    /* for (int i = 0; i <= IBI; i++) {
       strip.setPixelColor(i, strip.Color(255, 0, 0));  
       strip.show();
@@ -49,7 +52,7 @@ void loop() {
       strip.show(); 
     } */
 
-    l_IBI = IBI;
+   
    // colorSet(30, strip.Color(IBI, 0, 0));
    /* if (IBI > 0){
       //for (int j = 0; j < IBI; j++) {
