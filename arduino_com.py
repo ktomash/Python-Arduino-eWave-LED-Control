@@ -1,6 +1,7 @@
 import struct
 import socket
 import serial
+import math
 
 # con = False
 
@@ -29,15 +30,16 @@ while True:
     print (orig_data)
 
     data = orig_data.decode('utf-8')
-    if "IBI=" in data:
+    if "EP=" in data:
+        print(data)
         data_arr = data.split(' ')
-        IBI_str = data_arr[9]
-        print(IBI_str)
-        IBI = int(IBI_str[5:(len(IBI_str)-1)])
-        print('IBI is ',IBI)
-        IBIi = int((IBI%400-IBI%8)/8)
-        print(IBIi)
-        ser.write(struct.pack('b', IBIi))
+        EP_str = data_arr[8]
+        print(EP_str)
+        EP = int(EP_str[4:(len(EP_str)-1)])
+        print('EP is ',EP)
+        CS = int (round (10*(math.log10 (1+EP/10) )) )
+        print(CS)
+        ser.write(struct.pack('b', CS))
 
 
 
