@@ -8,41 +8,36 @@
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(60, PIN, NEO_GRB + NEO_KHZ800);
 
-int l_CS = 0;
+int l_CS = 7;
+int oR = 0;
+int oG = 0;
+int oB = 0;
 
 void setup() {
   Serial.begin(115200);
   Serial.println("TEST");
   strip.begin();
   strip.show();
+
 }
 
 void loop() {
 
+
   if (Serial.available() > 0) {
     int CS = Serial.read();
 
-    if (CS < 6) {
-      for (int i = 0; i < strip.numPixels(); i++) {
-        strip.setPixelColor(i, strip.Color(255, 0, 0));
-        strip.show(); 
-      }
-    } else {
-      if (CS < 21) {
-        for (int i = 0; i < strip.numPixels(); i++) {
-          strip.setPixelColor(i, strip.Color(0, 0, 255));
-          strip.show(); 
-        }
-      } else {
-        for (int i = 0; i < strip.numPixels(); i++) {
-          strip.setPixelColor(i, strip.Color(0, 255, 0));
-          strip.show(); 
-        }
-      }
+    for (int j = 0; j < strip.numPixels(); j++) {
+      strip.setPixelColor(j, strip.Color((200-2*CS*CS), (200-2*(CS-10)*(CS-10)), (255-(CS-30)*(CS-30))));
+      strip.show(); 
     }
+
+
     l_CS = CS;
   }      
 }
+
+
     
     
 
