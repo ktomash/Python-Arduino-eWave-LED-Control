@@ -23,7 +23,7 @@ print ("ok")
 
 ii = 0
 
-while ii < 1000:
+while True:
 
     orig_data = s.recv(4000)
     print (orig_data)
@@ -35,12 +35,9 @@ while ii < 1000:
         print(IBI_str)
         IBI = int(IBI_str[5:(len(IBI_str)-1)])
         print('IBI is ',IBI)
-        # IBI_byte1 = bytes(int(IBI/256))
         IBIi = int((IBI%400-IBI%8)/8)
         print(IBIi)
-        # IBI_byte = bytes(IBI)
         ser.write(struct.pack('b', IBIi))
-    ii = ii + 1
 
 
 
