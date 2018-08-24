@@ -1,19 +1,20 @@
-
 import struct
 import socket
 import serial
 
 # con = False
-print("init")
+
 s= socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-print("socket made")
+
 
 s.connect(('localhost', 20480))
-print("socket conn")
 
 ser = serial.Serial("COM3", 115200)
-print("serial made")
+# while not con:
+#     serin = ser.read()
+#     con = True
 
+print(ser.readline())
  
 orig_data = s.recv(4000)
 
